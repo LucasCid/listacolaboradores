@@ -16,6 +16,18 @@ const Colaboradores = () => {
     const enviarFormulario = (e) => {
         e.preventDefault();
 
+    
+        if (
+            nuevoColaborador.nombre.trim() === "" ||
+            nuevoColaborador.correo.trim() === "" ||
+            nuevoColaborador.edad.trim() === "" ||
+            nuevoColaborador.cargo.trim() === "" ||
+            nuevoColaborador.telefono.trim() === ""
+        ) {
+            alert("Por favor, completa todos los campos del formulario.");
+            return;
+        }
+
         setListaColaboradores([...listaColaboradores, nuevoColaborador]);
         setNuevoColaborador({
             id: "",
@@ -34,16 +46,6 @@ const Colaboradores = () => {
             [name]: value
         }));
     };
-
-    // const completarColaborador = (tarea) => {
-    //     const nuevosColaboradores = listaColaboradores.map((colab) => {
-    //         if (colab.nombre === tarea.nombre) {
-    //             return { ...colab, completada: true };
-    //         }
-    //         return colab;
-    //     });
-    //     setListaColaboradores(nuevosColaboradores);
-    // };
 
     const eliminarColaborador = (colaborador) => {
         const listaFiltrada = listaColaboradores.filter((colab) => colab.nombre !== colaborador.nombre);
@@ -81,11 +83,7 @@ const Colaboradores = () => {
                             <td>{colaborador.cargo}</td>
                             <td>{colaborador.telefono}</td>
                             <td>
-                                {/* {!colaborador.completada && (
-                                    <button onClick={() => completarColaborador(colaborador)} className="btn btn-success">
-                                        Completar
-                                    </button>
-                                )} */}
+                                
                                 <button onClick={() => eliminarColaborador(colaborador)} className="btn btn-danger ms-2">
                                     Borrar
                                 </button>
